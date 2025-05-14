@@ -53,7 +53,7 @@ namespace CompanyCam.NET.Models
         public string PublicUrl { get; set; }
 
         [JsonPropertyName("coordinates")]
-        public Coordinates Coordinates { get; set; }
+        public Coordinate Coordinates { get; set; }
 
         [JsonPropertyName("geofence")]
         public List<object> Geofence { get; set; }

@@ -12,9 +12,9 @@ namespace CompanyCam.NET.Models
         [JsonPropertyName("address")]
         public Address Address { get; set; }
         [JsonPropertyName("coordinates")]
-        public Coordinates Coordinates { get; set; }
+        public Coordinate Coordinate { get; set; }
         [JsonPropertyName("geofence")]
-        public List<Coordinates> GeoFence { get; set; }
+        public List<Coordinate> GeoFence { get; set; }
         [JsonPropertyName("primary_contact")]
         public Contact Contact { get; set; }
     }

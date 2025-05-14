@@ -20,6 +20,7 @@ namespace CompanyCam.NET.Models
         public string StreetAddress1 { get; set; }
 
         [JsonPropertyName("street_address_2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string StreetAddress2 { get; set; }
     }
 }

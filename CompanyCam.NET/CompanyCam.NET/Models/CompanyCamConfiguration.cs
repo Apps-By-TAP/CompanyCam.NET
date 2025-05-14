@@ -7,6 +7,6 @@ namespace CompanyCam.NET.Models
     public class CompanyCamConfiguration
     {
         public string AccessToken { get; set; }
-        public string CompanyCampUrl { get; set; } = "https://api.companycam.com/v2/";
+        public string CompanyCampUrl { get; } = "https://api.companycam.com/v2/";
     }
 }

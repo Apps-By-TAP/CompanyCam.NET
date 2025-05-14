@@ -18,7 +18,7 @@ namespace CompanyCam.NET.Models
         public string CompanyId { get; set; }
 
         [JsonPropertyName("coordinates")]
-        public Coordinates Coordinates { get; set; }
+        public Coordinate Coordinates { get; set; }
 
         [JsonPropertyName("created_at")]
         public long CreatedAt { get; set; }

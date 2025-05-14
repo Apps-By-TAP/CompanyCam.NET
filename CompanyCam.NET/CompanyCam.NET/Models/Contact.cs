@@ -5,12 +5,15 @@ namespace CompanyCam.NET.Models
     public class Contact
     {
         [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Id { get; set; }
 
         [JsonPropertyName("company_id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string CompanyId { get; set; }
 
         [JsonPropertyName("project_id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string ProjectId { get; set; }
 
         [JsonPropertyName("name")]

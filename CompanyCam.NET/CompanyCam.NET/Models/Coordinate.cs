@@ -2,7 +2,7 @@
 
 namespace CompanyCam.NET.Models
 {
-    public class Coordinates
+    public class Coordinate
     {
         [JsonPropertyName("lat")]
         public double Lat { get; set; }

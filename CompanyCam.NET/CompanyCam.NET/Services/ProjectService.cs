@@ -1,21 +1,19 @@
 ﻿using CompanyCam.NET.Models;
-using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 using static CompanyCam.NET.Utils.Utils;
 using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace CompanyCam.NET.Services
 {
     public class ProjectService
     {
-        private RestClient _client;
+        private HttpClient _client;
 
-        public ProjectService(RestClient client)
+        internal ProjectService(HttpClient client)
         {
             _client = client;
         }
@@ -37,8 +35,19 @@ namespace CompanyCam.NET.Services
             if (!string.IsNullOrEmpty(query)) queryString = AddQueryParameter(queryString, "query", query);
             if (modifiedSince.HasValue) queryString = AddQueryParameter(queryString, "modified_since", modifiedSince.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
 
-            RestRequest request = new RestRequest($"projects{queryString}");
-            return await _client.GetAsync<List<Project>>(request);
+            _client.DefaultRequestHeaders.Remove("X_COMPANYCAM_USER");
+            _client.DefaultRequestHeaders.Remove("accept");
+
+            var response = await _client.GetAsync($"projects{queryString}");
+
+            if(response.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<List<Project>>(await response.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                return new List<Project>();
+            }
         }
 
         /// <summary>
@@ -49,16 +58,20 @@ namespace CompanyCam.NET.Services
         /// <returns>CreateProjectResponse</returns>
         public async Task<CreateProjectResponse> CreateProjectAsync(string userEmail, CreateProjectRequest createProjectRequest)
         {
-            RestRequest request = new RestRequest("projects");
-            request.AddHeader("accept", "application/json");
-            request.AddHeader("X_COMPANYCAM_USER", userEmail);
-            request.AddJsonBody(JsonSerializer.Serialize(createProjectRequest));
+            _client.DefaultRequestHeaders.Remove("X_COMPANYCAM_USER");
+            _client.DefaultRequestHeaders.Remove("accept");
 
-            var response = await _client.PostAsync(request);
+            _client.DefaultRequestHeaders.Add("accept", "application/json");
+            _client.DefaultRequestHeaders.Add("X_COMPANYCAM_USER", userEmail);
 
-            if (response.IsSuccessful)
+            HttpResponseMessage response = null;
+
+
+            response = await _client.PostAsJsonAsync("projects", createProjectRequest);
+
+            if (response.IsSuccessStatusCode)
             {
-                CreateProjectResponse result = JsonSerializer.Deserialize<CreateProjectResponse>(response.Content);
+                CreateProjectResponse result = await response.Content.ReadFromJsonAsync<CreateProjectResponse>();
                 result.Success = true;
                 return result;
             }
@@ -67,7 +80,7 @@ namespace CompanyCam.NET.Services
                 return new CreateProjectResponse
                 {
                     Success = false,
-                    Error = response.Content
+                    Error = await response.Content.ReadAsStringAsync()
                 };
             }
         }
@@ -79,16 +92,14 @@ namespace CompanyCam.NET.Services
         /// <returns>bool</returns>
         public async Task<bool> DeleteProjectAsync(string projectId)
         {
-            RestRequest request = new RestRequest($"projects/{projectId}");
-            request.AddHeader("accept", "application/json");
-            try
-            {
-                return (await _client.DeleteAsync(request)).IsSuccessful;
-            }
-            catch
-            {
-                return false;
-            }
+            _client.DefaultRequestHeaders.Remove("X_COMPANYCAM_USER");
+            _client.DefaultRequestHeaders.Remove("accept");
+
+            _client.DefaultRequestHeaders.Add("accept", "application/json");
+
+            HttpResponseMessage response = await _client.DeleteAsync($"projects/{projectId}");
+
+            return response.IsSuccessStatusCode;
         }
     }
 }
