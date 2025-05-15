@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>CompanyCam.NET</id>
-		<version>1.0.0-alpha.2</version>
-		<authors>Apps-By-TAP</authors>
-		<owners>Apps-By-TAP</owners>
+		<version>1.0.0-alpha.7</version>
+		<authors>Apps By TAP</authors>
+		<owners>Apps By TAP</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>An unofficial implementation of the CompanyCam API</description>
 		<releaseNotes>Initial alpha release with basic functionality</releaseNotes>
@@ -14,13 +14,18 @@
 		<projectUrl>https://github.com/Apps-By-TAP/CompanyCam.NET</projectUrl>
 		<tags>CompanyCam API</tags>
 		<dependencies>
-			<dependency id="System.Net.Http.Json" version=">=9.0.5" />
-			<dependency id="System.Text.Json" version=">=9.05" />
+			<dependency id="System.Net.Http.Json" version="9.0.5" />
 		</dependencies>
 		<readme>README.md</readme>
 	</metadata>
 	<files>
 		<file src="README.md" target="README.md" />
 		<file src="bin\Release\netstandard2.0\CompanyCam.NET.dll" target="lib\netstandard2.0\CompanyCam.NET.dll" />
+		<file src="bin\Release\net6.0\CompanyCam.NET.dll" target="lib\net6.0\CompanyCam.NET.dll" />
+		<file src="bin\Release\net7.0\CompanyCam.NET.dll" target="lib\net7.0\CompanyCam.NET.dll" />
+		<file src="bin\Release\net8.0\CompanyCam.NET.dll" target="lib\net8.0\CompanyCam.NET.dll" />
+		<file src="bin\Release\net9.0\CompanyCam.NET.dll" target="lib\net9.0\CompanyCam.NET.dll" />
+		<file src="bin\Release\net462\CompanyCam.NET.dll" target="lib\net462\CompanyCam.NET.dll" />
 	</files>
+
 </package>
