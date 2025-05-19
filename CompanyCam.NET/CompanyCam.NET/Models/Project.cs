@@ -60,7 +60,8 @@ namespace CompanyCam.NET.Models
         public int PhotoCount { get; set; }
 
         [JsonPropertyName("primary_contact")]
-        public string PrimaryContact { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]   
+        public Contact PrimaryContact { get; set; }
 
         [JsonPropertyName("project_url")]
         public string ProjectUrl { get; set; }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>CompanyCam.NET</id>
-		<version>1.0.0-alpha.7</version>
+		<version>1.0.0-alpha.8</version>
 		<authors>Apps By TAP</authors>
 		<owners>Apps By TAP</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,7 +14,24 @@
 		<projectUrl>https://github.com/Apps-By-TAP/CompanyCam.NET</projectUrl>
 		<tags>CompanyCam API</tags>
 		<dependencies>
-			<dependency id="System.Net.Http.Json" version="9.0.5" />
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
+			<group targetFramework="net6.0">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
+			<group targetFramework="net7.0">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
+			<group targetFramework="net8.0">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
+			<group targetFramework="net9.0">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
+			<group targetFramework=".NETFramework4.6.2">
+				<dependency id="System.Net.Http.Json" version="9.0.5" />
+			</group>
 		</dependencies>
 		<readme>README.md</readme>
 	</metadata>
