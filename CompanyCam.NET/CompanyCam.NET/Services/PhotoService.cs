@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CompanyCam.NET.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -22,8 +23,8 @@ namespace CompanyCam.NET.Services
         /// <param name="photoId">Photo ID</param>
         /// <param name="page">Which tag page</param>
         /// <param name="perPage">Number of tags per page</param>
-        /// <returns></returns>
-        public async Task<List<string>> ListPhotoTagsAsync(string photoId, int page = -1, int perPage = -1)
+        /// <returns>A list of Photo Tags</returns>
+        public async Task<List<PhotoTag>> ListPhotoTagsAsync(string photoId, int page = -1, int perPage = -1)
         {
             string queryString = string.Empty;
 
@@ -36,11 +37,11 @@ namespace CompanyCam.NET.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<List<string>>();
+                return await response.Content.ReadFromJsonAsync<List<PhotoTag>>();
             }
             else
             {
-                return new List<string>();
+                return new List<PhotoTag>();
             }
         }
     }
