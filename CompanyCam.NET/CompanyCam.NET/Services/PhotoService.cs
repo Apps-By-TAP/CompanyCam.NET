@@ -44,5 +44,21 @@ namespace CompanyCam.NET.Services
                 return new List<PhotoTag>();
             }
         }
+
+        public async Task<List<PhotoTag>> AddTags(string photoId, List<string> tags)
+        {
+            var content = JsonContent.Create(new { tags = tags });
+            _client.DefaultRequestHeaders.Remove("X_COMPANYCAM_USER");
+            var response = await _client.PostAsync($"photos/{photoId}/tags", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<List<PhotoTag>>();
+            }
+            else
+            {
+                return new List<PhotoTag>();
+            }
+        }
     }
 }
