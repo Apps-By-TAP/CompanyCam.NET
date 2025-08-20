@@ -2,7 +2,7 @@
 
 namespace CompanyCam.NET.Models
 {
-    public class Photo
+    public partial class Photo
     {
         /// <summary>
         /// The unique ID for the photo.

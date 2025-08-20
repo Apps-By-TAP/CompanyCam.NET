@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CompanyCam.NET.Models
 {    
-    public class Project
+    public partial class Project
     {
         [JsonPropertyName("address")]
         public Address Address { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CompanyCam.NET.Models
 {
-    public class Contact
+    public partial class Contact
     {
         [JsonPropertyName("id")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

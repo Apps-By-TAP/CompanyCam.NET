@@ -1,9 +1,7 @@
 ﻿using CompanyCam.NET.Models;
 using CompanyCam.NET.Services;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace CompanyCam.NET
 {
@@ -19,5 +17,6 @@ namespace CompanyCam.NET
         }
 
         public ProjectService CreateProjectService() => new ProjectService(_httpClient);
+        public PhotoService CreatePhotoService() => new PhotoService(_httpClient);
     }
 }

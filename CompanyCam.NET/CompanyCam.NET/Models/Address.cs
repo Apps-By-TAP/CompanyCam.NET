@@ -2,7 +2,7 @@
 
 namespace CompanyCam.NET.Models
 {
-    public class Address
+    public partial class Address
     {
         [JsonPropertyName("city")]
         public string City { get; set; }
